@@ -1,0 +1,13 @@
+﻿@model WebApp.ViewModel.ResponseLogin
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p>Name: </p><p>@Html.DisplayFor(model => model.FullName)</p>
+    <p>Email: </p><p>@Html.DisplayFor(model => model.Email)</p>
+    <p>Role: </p><p>@Html.DisplayFor(model => model.Role)</p>
+</div>
