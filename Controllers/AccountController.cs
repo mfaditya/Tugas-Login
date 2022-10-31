@@ -79,20 +79,19 @@ namespace WebApp.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult ChangePassword(string email, string password, string confirm)
+        public IActionResult ChangePassword(string email, string passwordLama, string passwordBaru)
         {
             var data = myContext.Users
                 .Include(x => x.Employee)
                 .Include(x => x.Role)
                 .AsNoTracking()
-                .SingleOrDefault(x => x.Employee.Email.Equals(email) && x.Password.Equals(password));
-            myContext.SaveChanges();
+                .SingleOrDefault(x => x.Employee.Email.Equals(email) && x.Password.Equals(passwordLama));
             if(data != null)
             {
                 User user = new User()
                 {
                     Id = data.Id,
-                    Password = confirm,
+                    Password = passwordBaru,
                     RoleId = data.RoleId
                 };
                 myContext.Entry(user).State = EntityState.Modified;
@@ -111,19 +110,19 @@ namespace WebApp.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult ForgotPassword(string email, string confirm)
+        public IActionResult ForgotPassword(string email, string passwordBaru)
         {
             var data = myContext.Users
                 .Include(x => x.Employee)
                 .Include(x => x.Role)
-                .SingleOrDefault(x => x.Employee.Email.Equals(email) && x.Password.Equals(confirm));
-            myContext.SaveChanges();
+                .AsNoTracking()
+                .SingleOrDefault(x => x.Employee.Email.Equals(email));
             if(data != null)
             {
                 User user = new User()
                 {
                     Id = data.Id,
-                    Password = confirm,
+                    Password = passwordBaru,
                     RoleId = data.RoleId
                 };
                 myContext.Entry(user).State = EntityState.Modified;
