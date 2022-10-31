@@ -81,8 +81,7 @@ namespace WebApp.Controllers
         [HttpPost]
         public IActionResult ChangePassword(string email, string passwordLama, string passwordBaru)
         {
-            var data = myContext.Users
-                .Include(x => x.Employee)
+            var data = myContext.Users.Include(x => x.Employee)
                 .SingleOrDefault(x => x.Employee.Email.Equals(email) && x.Password.Equals(passwordLama));
             if(data != null)
             {
@@ -105,8 +104,7 @@ namespace WebApp.Controllers
         [HttpPost]
         public IActionResult ForgotPassword(string email, string passwordBaru)
         {
-            var data = myContext.Users
-                .Include(x => x.Employee)
+            var data = myContext.Users.Include(x => x.Employee)
                 .SingleOrDefault(x => x.Employee.Email.Equals(email));
             if(data != null)
             {
