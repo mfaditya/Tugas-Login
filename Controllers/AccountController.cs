@@ -83,18 +83,11 @@ namespace WebApp.Controllers
         {
             var data = myContext.Users
                 .Include(x => x.Employee)
-                .Include(x => x.Role)
-                .AsNoTracking()
                 .SingleOrDefault(x => x.Employee.Email.Equals(email) && x.Password.Equals(passwordLama));
             if(data != null)
             {
-                User user = new User()
-                {
-                    Id = data.Id,
-                    Password = passwordBaru,
-                    RoleId = data.RoleId
-                };
-                myContext.Entry(user).State = EntityState.Modified;
+                data.Password = passwordBaru;
+                myContext.Entry(data).State = EntityState.Modified;
                 var resultUser = myContext.SaveChanges();
                 if(resultUser > 0)
                 {
@@ -114,18 +107,11 @@ namespace WebApp.Controllers
         {
             var data = myContext.Users
                 .Include(x => x.Employee)
-                .Include(x => x.Role)
-                .AsNoTracking()
                 .SingleOrDefault(x => x.Employee.Email.Equals(email));
             if(data != null)
             {
-                User user = new User()
-                {
-                    Id = data.Id,
-                    Password = passwordBaru,
-                    RoleId = data.RoleId
-                };
-                myContext.Entry(user).State = EntityState.Modified;
+                data.Password = passwordBaru;
+                myContext.Entry(data).State = EntityState.Modified;
                 var resultUser = myContext.SaveChanges();
                 if (resultUser > 0)
                 {
