@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using WebApp.Base;
 
 namespace WebApp.Models
 {
-    public class Division
+    public class Division : BaseModel
     {
         public Division(int Id, string Name)
         {

@@ -13,12 +13,24 @@ namespace WebApp.Controllers
         {
             this.myContext = myContext;
         }
-
+        
+        // Get All
         public IActionResult Index()
         {
-            var data = myContext.Divisions.ToList();
-            return View(data);
+            var role = HttpContext.Session.GetString("Role");
+
+            if(role == "Admin")
+            {
+                var data = myContext.Divisions.ToList();
+                return View(data);
+            }
+            else if (role == null)
+            {
+                return RedirectToAction("UnAuthorized", "ErrorPage");
+            }
+            return RedirectToAction("Forbidden", "ErrorPage");
         }
+        // Get By Id
         public IActionResult Details(int id)
         {
             var data = myContext.Divisions.Find(id);
@@ -33,6 +45,8 @@ namespace WebApp.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Division division)
         {
+            division.CreatedBy = HttpContext.Session.GetString("FullName");
+            division.CreateDate = DateTime.Now.ToLocalTime();
             myContext.Divisions.Add(division);
             var result = myContext.SaveChanges(); //execute nonquery ngereturn int
             if (result > 0)

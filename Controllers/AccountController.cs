@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApp.Context;
+using WebApp.Handlers;
 using WebApp.Models;
 using WebApp.ViewModel;
 
@@ -26,16 +27,25 @@ namespace WebApp.Controllers
             var data = myContext.Users
                 .Include(x => x.Employee)
                 .Include(x => x.Role)
-                .SingleOrDefault(x => x.Employee.Email.Equals(email) && x.Password.Equals(password));
-            if (data != null)
+                .SingleOrDefault(x => x.Employee.Email.Equals(email));
+            var validatePass = Hashing.ValidatePassword(password, data.Password);
+            
+            if (data != null && validatePass)
             {
-                ResponseLogin responseLogin = new ResponseLogin()
-                {
-                    FullName = data.Employee.FullName,
-                    Email = data.Employee.Email,
-                    Role = data.Role.Name
-                };
-                return RedirectToAction("Index", "Home", responseLogin);
+                //ResponseLogin responseLogin = new ResponseLogin()
+                //{
+                //    Id = data.Id,
+                //    FullName = data.Employee.FullName,
+                //    Email = data.Employee.Email,
+                //    Role = data.Role.Name
+                //};
+
+                HttpContext.Session.SetInt32("Id", data.Id);
+                HttpContext.Session.SetString("FullName", data.Employee.FullName);
+                HttpContext.Session.SetString("Email", data.Employee.Email);
+                HttpContext.Session.SetString("Role", data.Role.Name);
+
+                return RedirectToAction("Index", "Home"/* responseLogin*/);
             }
             return View();
         }
@@ -55,20 +65,24 @@ namespace WebApp.Controllers
                 BirthDate = birthDate
             };
             myContext.Employees.Add(employee);
-            var result = myContext.SaveChanges();
-            if (result > 0)
+            var data = myContext.Employees.SingleOrDefault(x => x.Email.Equals(email));
+            if (data == null)
             {
-                var id = myContext.Employees.SingleOrDefault(x => x.Email.Equals(email)).Id;
-                User user = new User()
+                var result = myContext.SaveChanges();
+                if (result > 0)
                 {
-                    Id = id,
-                    Password = password,
-                    RoleId = 1
-                };
-                myContext.Users.Add(user);
-                var resultUser = myContext.SaveChanges();
-                if (resultUser > 0)
-                    return RedirectToAction("Login", "Account");
+                    var id = myContext.Employees.SingleOrDefault(x => x.Email.Equals(email)).Id;
+                    User user = new User()
+                    {
+                        Id = id,
+                        Password = Hashing.HashPassword(password),
+                        RoleId = 1
+                    };
+                    myContext.Users.Add(user);
+                    var resultUser = myContext.SaveChanges();
+                    if (resultUser > 0)
+                        return RedirectToAction("Login", "Account");
+                }
             }
             return View();
         }
@@ -82,10 +96,11 @@ namespace WebApp.Controllers
         public IActionResult ChangePassword(string email, string passwordLama, string passwordBaru)
         {
             var data = myContext.Users.Include(x => x.Employee)
-                .SingleOrDefault(x => x.Employee.Email.Equals(email) && x.Password.Equals(passwordLama));
-            if(data != null)
+                .SingleOrDefault(x => x.Employee.Email.Equals(email));
+            var validatePass = Hashing.HashPassword(passwordLama);
+            if (data != null)
             {
-                data.Password = passwordBaru;
+                data.Password = Hashing.HashPassword(passwordBaru);
                 myContext.Entry(data).State = EntityState.Modified;
                 var resultUser = myContext.SaveChanges();
                 if(resultUser > 0)
@@ -108,7 +123,7 @@ namespace WebApp.Controllers
                 .SingleOrDefault(x => x.Employee.Email.Equals(email));
             if(data != null)
             {
-                data.Password = passwordBaru;
+                data.Password = Hashing.HashPassword(passwordBaru);
                 myContext.Entry(data).State = EntityState.Modified;
                 var resultUser = myContext.SaveChanges();
                 if (resultUser > 0)

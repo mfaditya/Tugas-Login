@@ -2,14 +2,95 @@
 
 @{
     ViewData["Title"] = "Index";
+    Layout = "_AdminLayout";
 }
 
-<h1>Index</h1>
+<h1>Department</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<button type="button" class="btn btn-info btn-lg" id="btnCreate" data-bs-toggle="modal" data-bs-target="#CreateDepartment">Create New Data</button>
+
+<div class="card">
+    <div class="table-responsive">
+        <table class="table align-items-center mb-0" id="tableDepartment">
+            <thead>
+                <tr>
+                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">ID</th>
+                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">Nama</th>
+                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Division ID</th>
+                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!--Modal Detail-->
+<div class="modal fade" id="detailModalDepart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Detail</h5>
+            </div>
+            <div class="modal-body">
+                <div id="detailData">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal Edit-->
+<div class="modal fade" id="editdataDepartment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+            </div>
+            <div class="modal-body">
+                <div id="editData">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal Create-->
+<div class="modal fade" id="CreateDepartment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">Create Data</h5>
+            </div>
+            <div class="modal-body" id="editData">
+                <form>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">Name</label>
+                        <input type="text" class="form-control" id="createDataName" />
+                        <label for="formGroupExampleInput">Division Id</label>
+                        <input type="text" class="form-control" id="CreateDivisionId" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
+                <button id="saveBtn" type="button" class="btn btn-primary" onclick="createDepartment()">Add Data</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<table class="table">
     <thead>
         <tr>
             <th>
@@ -31,11 +112,11 @@
                 @Html.DisplayFor(modelItem => item.DivisionId)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a class="btn btn-primary" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }
     </tbody>
-</table>
+</table>*@

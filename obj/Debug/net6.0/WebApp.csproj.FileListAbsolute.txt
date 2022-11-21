@@ -262,3 +262,4 @@ D:\DOC\BOOTCAMP\Week 4\WebApp\bin\Debug\net6.0\runtimes\unix\lib\net6.0\System.D
 D:\DOC\BOOTCAMP\Week 4\WebApp\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
 D:\DOC\BOOTCAMP\Week 4\WebApp\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 D:\DOC\BOOTCAMP\Week 4\WebApp\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+D:\DOC\BOOTCAMP\Week 4\WebApp\bin\Debug\net6.0\BCrypt.Net-Core.dll

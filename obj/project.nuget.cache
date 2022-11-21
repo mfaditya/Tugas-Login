@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "GyubRV5nS2x50a7Z2i07Af/RKkcCDbEFJ8AxjiHdebh7P5F6Hk1LqrjWF4eNW29Aii3bznj4jRyvU1u6GOFLsw==",
+  "dgSpecHash": "mXg/SmFwwXj0fIdqclHRSSgGfOrpNn3kbcJ/Mi/RZhrE8mU6jOtWE59U7ZEx8WYEc7oqe+ClZpFN90OCoi9IWQ==",
   "success": true,
   "projectFilePath": "D:\\DOC\\BOOTCAMP\\Week 4\\WebApp\\WebApp.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\adity\\.nuget\\packages\\bcrypt.net-core\\1.6.0\\bcrypt.net-core.1.6.0.nupkg.sha512",
     "C:\\Users\\adity\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\adity\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",
     "C:\\Users\\adity\\.nuget\\packages\\messagepack.annotations\\2.1.152\\messagepack.annotations.2.1.152.nupkg.sha512",
