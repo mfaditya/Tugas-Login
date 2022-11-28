@@ -5,9 +5,85 @@
     Layout = "_AdminLayout";
 }
 
-<h1>Division</h1>
+<h1 style="color: white">Division</h1>
+<button type="button" class="btn btn-info btn-lg" data-bs-toggle="modal" data-bs-target="#CreateDivision">Create New Data</button>
 
-<p>
+<div class="card py-4 px-4">
+    <div class="table-responsive">
+        <table class="table align-items-center mb-0" id="tableDivision">
+            <thead>
+                <tr>
+                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">ID</th>
+                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">Nama</th>
+                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!--Modal Detail-->
+<div class="modal fade" id="detailModalDivision" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Detail</h5>
+            </div>
+            <div class="modal-body">
+                <div id="detailData">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal Edit-->
+<div class="modal fade" id="editdataDivision" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+            </div>
+            <div class="modal-body">
+                <div id="editData">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal Create-->
+<div class="modal fade" id="CreateDivision" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">Create Data</h5>
+            </div>
+            <div class="modal-body" id="editData">
+                <form>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">Name</label>
+                        <input type="text" class="form-control" id="createDataName" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
+                <button id="saveBtn" type="button" class="btn btn-primary" onclick="createDivision()">Add Data</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<p>
     <a class="btn btn-primary" asp-action="Create">Create New</a>
 </p>
 <table class="table">
@@ -44,4 +120,4 @@
         </tr>
 }
     </tbody>
-</table>
+</table>*@

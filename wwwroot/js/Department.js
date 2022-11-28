@@ -2,11 +2,11 @@
     $('#tableDepartment').DataTable({
         ajax: {
             url: 'https://localhost:7213/api/Department',
+            type: "GET",
             dataSrc: 'data',
-            "headers": {
-                'Content-Type': 'application/x-www-form-urlencoded'
+            headers: {
+                'Authorization': "Bearer " + sessionStorage.getItem("token")
             },
-            "type": "GET"
         },
         columns: [
             { data: 'id', },
@@ -38,8 +38,8 @@ function detailDepartment(id) {
         temp += `
              <input type="hidden" class="form-control" id="hideId" readonly placeholder"" value="0">
              <h5>ID: <h5><input type="text" class="form-control" id=departId" placeholder="${res.data.id}" value="${res.data.id}" readonly>
-             <h5>Nama: <h5><input type="text" class="form-control" id=departName placeholder="${res.data.name}" value="${res.data.name}">
-             <h5>Division ID: <h5><input type="text" class="form-control" id=departName placeholder="${res.data.divisionId}" value="${res.data.divisionId}">`;
+             <h5>Nama: <h5><input type="text" class="form-control" id=departName placeholder="${res.data.name}" value="${res.data.name}" readonly>
+             <h5>Division ID: <h5><input type="text" class="form-control" id=departName placeholder="${res.data.divisionId}" value="${res.data.divisionId}" readonly>`;
         $("#detailData").html(temp);
         console.log(res.data.id);
     }).fail((err) => {
@@ -55,7 +55,7 @@ function editDepartment(id) {
         let temp = "";
         temp +=`
             <input type="hidden" class="form-control" id="hideId" readonly placeholder="" value="0">
-            <p>Id: </p><input type="text" class="form-control" id="departId" placeholder="${res.data.id}" value="${res.data.id}">
+            <p>Id: </p><input type="text" class="form-control" id="departId" placeholder="${res.data.id}" value="${res.data.id}" readonly>
             <p>Name: </p><input type="text" class="form-control" id="departmentName" placeholder="${res.data.name}" value="${res.data.name}">
             <p>Division Id: </p><input type="text" class="form-control" id="departmentDivisionId" placeholder="${res.data.divisionId}" value="${res.data.divisionId}">
             <button type= "button" class= "btn-primary" id= "editButton" onclick="saveDepartment('${res.data.id}')">Save Changes</button>
@@ -146,3 +146,34 @@ function createDepartment() {
         }
     });
 }
+
+//function chartDepartment() {
+//    $.ajax({
+//        url: 'https://localhost:7213/api/Department'
+//    }).done((res) => {
+//        let labels = [];
+//        labels.push(res.data.divisionId);
+
+//        const config = {
+//            type: 'pie',
+//            data: data,
+//        };
+
+//        const data = {
+//            labels: labels;
+//            datasets: [{
+//                label: '',
+//                data: labels,
+//                backgroundColor: [
+//                    'rgb(252, 116, 101)',
+//                    'rgb(54, 162, 235)',
+//                    'rbg(255, 205, 86)'
+//                ],
+//                hoverOffset: 4
+//            }]
+//        };
+//        $("#pieChart").html(data);
+//    }).fail((err) => {
+//        console.log(err);
+//    });
+//}
